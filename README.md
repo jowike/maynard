@@ -16,7 +16,7 @@ Based on years of experience in machine learning and econometrics, we’ve build
 * **Real-time Insights** – Instant prediction updates driven by economic news, based on machine learning + econometrics. 
 * **Explainable AI along the way (global and local)** – Aligned with responsible AI principles, the tool eliminates the ‘black box’ effect — not only tells you what’s gonna happen, but also provides insights into the why behind the predictions. 
 * **Battle-tested during COVID-19 pandemic** – By using machine learning algorithms and real-time data, `maynard` reacts fast to economic shocks. Our models started showing signs of weakening US growth in mid-March 2020.
-* **Proven in production** – it's the monthly model factory behind [InsightsNow.app](https://insightsnow.mini.pw.edu.pl/pages/dashboard)
+* **Proven in production** – it's the monthly model factory behind [InsightsNow.app](https://github.com/jowike/InsightsNow)
 
   Ready to see it in action?
     - 🎞️ [Jump to the demo →](https://www.youtube.com/watch?v=RfoxH-lfU7k) for tour of the tool
@@ -64,10 +64,15 @@ It handles everything — from raw data to cleaned inputs, model training, and f
 * **🧮 Tells you what’s driving the forecast**  
     You don’t just get a number — you get context. Local explanations (for each forecast) and global ones (across time) tell you which features are important and what are the underlying reasons for each forecast. No more black boxes — people want to know why
 ---
+Here's a revised version of your **"Getting Started"** section — keeping it simple, friendly, and logically flowing from install → setup → run → explore:
+
+---
 
 ## 🏁 Getting Started
 
-#### 📦 Install the package (in editable mode)
+### 📦 1. Install the package
+
+First, install `maynard` in editable mode:
 
 ```bash
 pip install -e .
@@ -75,43 +80,51 @@ pip install -e .
 
 ---
 
-#### ⚙️ Set things up
+### ⚙️ 2. Configure your run
 
-You can control how the pipeline works by editing two config files:
+Control how the pipeline behaves by editing:
 
-* `parameters.yaml` — sets the target variable, forecast/reference dates, and backtest range
-* `catalog.yaml` — defines data sources and where outputs are saved
+* `parameters.yaml` — choose the target variable, forecast dates, and backtest settings
+* `catalog.yaml` — tell the pipeline where to find your input data and where to save outputs
 
-You’ll find example configs in `/conf/base/`
+You'll find example configs in `/conf/base/`
 Sample input data is available in `/data/0_source/`
 
 ---
 
-#### 🧙🏻‍♂️ Run the pipeline
+### 🧙🏻‍♂️ 3. Make your first forecast 
 
-**Run the full pipeline from start to finish:**
+Run the full workflow from raw data to final forecast:
 
 ```bash
 maynard run
 ```
 
-**Run just one step (e.g. transform time series):**
+Want to test just a piece of it? No problem:
 
-```bash
-maynard run --from-nodes transform_time_series_node
-```
+* **Run a single step** (e.g. just transform time series):
 
-**Run a selected part of the pipeline (a few steps in a row):**
+  ```bash
+  maynard run --from-nodes transform_time_series_node
+  ```
 
-```bash
-maynard run --from-nodes transform_time_series_node --to-nodes estimate_ml_models_node,estimate_arima_node,estimate_var_node
-```
+* **Run a chunk of the pipeline** (e.g. from transformation to model estimation):
+
+  ```bash
+  maynard run --from-nodes transform_time_series_node --to-nodes estimate_ml_models_node,estimate_arima_node,estimate_var_node
+  ```
+
+* **Run selected model nodes only:**
+
+  ```bash
+  maynard run --nodes estimate_ml_models_node,estimate_arima_node,estimate_var_node
+  ```
 
 ---
 
-#### 🎨 Visualize the pipeline
+### 🎨 4. Explore the pipeline visually
 
-To explore how everything connects:
+Want to see how it all fits together? Launch the interactive blueprint of your data and ML workflows:
 
 ```bash
 maynard viz
@@ -119,7 +132,7 @@ maynard viz
 
 ---
 
-## 🫟 Coming Soon
+## 🔜 Coming Soon
 
 * PyPI release for `maynard`
 * Ready-to-use templates for typical nowcasting setups
