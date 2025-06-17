@@ -1,0 +1,69 @@
+[build-system]
+requires = [ "setuptools",]
+build-backend = "setuptools.build_meta"
+
+[project]
+requires-python = ">=3.9"
+name = "maynard"
+readme = "README.md"
+dynamic = [ "version",]
+license = {file = "LICENSE"}
+description = "A Kedro-based nowcasting tool for the modern economy."
+authors = [
+    { name = "Elżbieta Jowik", email = "jowik.elzbieta@gmail.com" },
+    { name = "Agnieszka Jastrzębska", email = "agnieszka.jastrzebska.mini@pw.edu.pl" },
+    { name = "Michał Gamrot", email = "gamrot@gmail.com" }
+]
+maintainers = [
+    { name = "Elżbieta Jowik", email = "jowik.elzbieta@gmail.com" }
+]
+dependencies = [ 
+    "ipython>=8.10",
+    "jupyterlab>=3.0",
+    "notebook",
+    "kedro~=0.19.9",
+    "kedro[jupyter]",
+    "kedro-datasets[pandas-csvdataset, pandas-exceldataset, pandas-parquetdataset, plotly-plotlydataset, plotly-jsondataset, matplotlib-matplotlibwriter]>=3.0",
+    "kedro-viz>=6.7.0",
+    "scikit-learn~=1.5.1",
+    "seaborn~=0.12.1",
+    "bottleneck",
+    "numpy==1.26.4",
+    "xlsxwriter",
+    "openpyxl",
+    "pyarrow",
+    "fastparquet",
+    "mifs @ git+https://github.com/jowike/mifs.git@maynard",  # Custom MIFS fork
+    "pmdarima",
+    "linear-tree",
+    "shap",
+    "python_dateutil",
+    "pandas",
+    "rpy2",
+    "scipy",
+    "statsmodels",
+    "typer"
+    ]
+
+
+[project.scripts]
+maynard = "maynard.__main__:app"
+
+[tool.kedro]
+package_name = "maynard"
+project_name = "maynard"
+kedro_init_version = "0.19.9"
+tools = "['Kedro Viz']"
+example_pipeline = "True"
+source_dir = "src"
+
+[tool.setuptools.dynamic.version]
+attr = "maynard.__version__"
+
+[tool.setuptools.packages.find]
+where = [ "src",]
+namespaces = false
+
+[tool.kedro_telemetry]
+project_id = "maynard"
+

@@ -1,0 +1,67 @@
+# Here you can define all your data sets by using simple YAML syntax.
+#
+# Documentation for this file format can be found in "The Data Catalog"
+# Link: https://docs.kedro.org/en/stable/data/data_catalog.html
+#
+# We support interacting with a variety of data stores including local file systems, cloud, network and HDFS
+#
+
+revision_history:
+  type: pandas.ParquetDataset
+  filepath: data/0_source/fred_series_allvintagedates.parquet
+
+vintage_data:
+  type: pandas.ParquetDataset
+  filepath: data/01_raw/vintage_snapshot.parquet  # actual real-time vintage (data available at the time of forecast)
+
+spec:
+  type: pandas.CSVDataset
+  filepath: data/03_primary/nowcast_spec.csv
+
+ragged_edge_aligned:
+  type: pandas.ExcelDataset
+  filepath: data/02_intermediate/ragged_edge_aligned.xlsx
+  load_args:
+    engine: openpyxl
+    sheet_name: data
+    header: 
+    index_col: 
+  save_args:
+    sheet_name: data
+    index: True
+
+transformed_aligned:
+  type: pandas.ParquetDataset
+  filepath: data/02_intermediate/transformed_aligned.parquet
+    
+raw_aligned:
+  type: pandas.ParquetDataset
+  filepath: data/02_intermediate/raw_aligned.parquet
+
+filtered_by_variance:
+  type: pandas.ParquetDataset
+  filepath: data/03_primary/filtered_by_variance.parquet
+
+filtered_stationary:
+  type: pandas.ParquetDataset
+  filepath: data/04_feature/filtered_stationary.parquet
+
+final_selected_features:
+  type: pandas.ParquetDataset
+  filepath: data/05_model_input/final_selected_features.parquet
+
+ar_estimation_results:
+  type: kedro_datasets.text.TextDataset
+  filepath: data/06_models/ar_node_completion_logs.txt
+
+var_estimation_results:
+  type: kedro_datasets.text.TextDataset
+  filepath: data/06_models/var_node_completion_logs.txt
+
+ml_estimation_results:
+  type: kedro_datasets.text.TextDataset
+  filepath: data/06_models/ml_node_completion_logs.txt
+
+results:
+  type: kedro_datasets.text.TextDataset
+  filepath: data/08_reporting/pipeline_completion_logs.txt

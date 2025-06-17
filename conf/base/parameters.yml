@@ -1,0 +1,38 @@
+# Here, you can define all your parameters using simple YAML syntax.
+#
+# Documentation for this file format can be found under "Parameters."
+# Link: https://docs.kedro.org/en/stable/configuration/parameters.html
+#
+# Kedro supports interacting with various data types, including strings, numbers, and lists.
+
+# Optional: Insert the path to a file that defines your custom specification.
+spec_options:
+  filepath: data/0_source/Spec_US_example.xlsx
+  country: US
+
+options:
+  y_code: PCEC96
+  ref_date: 2024-08-01
+  sample_start: 2000-01-01
+  vintage_name: real-time
+  series_code_col: VariableCode
+  series_name_col: Description
+  ref_date_col: ReferenceDate
+  pub_date_col: PublicationDate
+  series_val_col: VariableValue
+  freq_desc_col: FrequencyDescription
+  unit_col: Unit
+  series_categ_col: Category
+  region_col: Region
+  scope_freq_desc:
+    - Monthly
+    - Quarterly
+    - Monthly, End of Period
+  mifs_method: MRMR
+  backcasting_period: 72
+  model_output_directory: data/07_model_output/
+  reporting_directory: data/08_reporting/
+  ar_report_filename: ar.xlsx
+  var_report_filename: var.xlsx
+  ml_report_filename: ml.xlsx
+  out_report_filename: results.xlsx

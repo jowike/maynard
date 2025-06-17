@@ -1,0 +1,25 @@
+ipython>=8.10
+jupyterlab>=3.0
+notebook
+kedro~=0.19.9
+kedro[jupyter]
+kedro-datasets[pandas-csvdataset, pandas-exceldataset, pandas-parquetdataset, plotly-plotlydataset, plotly-jsondataset, matplotlib-matplotlibwriter]>=3.0
+kedro-viz>=6.7.0
+scikit-learn~=1.5.1
+seaborn~=0.12.1
+bottleneck
+numpy==1.26.4
+xlsxwriter
+openpyxl
+pyarrow
+fastparquet
+mifs @ git+https://github.com/jowike/mifs.git@maynard
+pmdarima
+linear-tree
+shap
+python_dateutil
+pandas
+rpy2
+scipy
+statsmodels
+typer
