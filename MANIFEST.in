@@ -1,5 +1,3 @@
 include README.md
 include LICENSE
-recursive-include conf *
-recursive-include data *
 recursive-include tests *

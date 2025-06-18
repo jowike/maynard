@@ -1,61 +1,75 @@
 import subprocess
+import tempfile
+from pathlib import Path
 import time
+import socket
 import os
 import signal
-import socket
+
 
 def is_port_open(host: str, port: int) -> bool:
-    """Check if the given port is open on the specified host."""
     sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    sock.settimeout(1)  # Timeout for the connection attempt
+    sock.settimeout(1)
     try:
         sock.connect((host, port))
         sock.close()
         return True
-    except (socket.timeout, socket.error):
+    except Exception:
         return False
 
-def test_viz_command():
 
-    def __find_free_port(port=5001, max_port=65535):
-        sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        while port <= max_port:
+def find_free_port(start=5001, end=6000):
+    with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
+        for port in range(start, end):
             try:
-                sock.bind(("", port))
-                sock.close()
+                s.bind(("", port))
                 return port
             except OSError:
-                port += 1
-        raise IOError("no free ports")
-    
+                continue
+    raise IOError("No free port available")
 
-    viz_port = __find_free_port()
 
-    kedro_viz_process = subprocess.Popen(
-        f"maynard viz --port={viz_port}",  # Run the command in the shell
-        shell=True,  # Use the shell to execute the command
-        preexec_fn=os.setsid,  # Create a new process group
-        stdout=subprocess.PIPE,  # Capture stdout
-        stderr=subprocess.PIPE,  # Capture stderr
-        text=True
-    )
+def test_viz_command():
+    with tempfile.TemporaryDirectory() as tmpdir:
+        project_path = Path(tmpdir) / "project"
 
-    # Give the server some time to start (you can adjust this as necessary)
-    time.sleep(30)  # Adjust this based on how long it typically takes for Kedro Viz to start
+        print("\n" + "=" * 30)
+        print("🏗️  Step 1: Initializing project for Viz test")
+        print("=" * 30)
+        print(f"Project path: {project_path}")
 
-    # Check if Kedro Viz is running on the expected port (e.g., 5001)
-    if is_port_open("127.0.0.1", viz_port):
-        print(f"Kedro Viz is running on port {viz_port}")
-    else:
-        print(f"Kedro Viz did not start on port {viz_port}")
-        # If the server is not running, terminate the process and fail the test
-        os.killpg(kedro_viz_process.pid, signal.SIGTERM)
-        kedro_viz_process.wait()
-        assert False, "Kedro Viz did not start successfully"
+        subprocess.run(["maynard", "init", str(project_path)], check=True)
 
-    # Terminate the process group after testing
-    os.killpg(kedro_viz_process.pid, signal.SIGTERM)  # Sends SIGTERM to the entire process group
+        print("\n" + "=" * 30)
+        print("📊 Step 2: Starting Kedro Viz")
+        print("=" * 30)
 
-    # Ensure the process has terminated
-    kedro_viz_process.wait()
+        viz_port = find_free_port()
+        viz_command = f"maynard viz --port={viz_port}"
+        print(f"Running command: {viz_command}")
 
+        proc = subprocess.Popen(
+            viz_command,
+            shell=True,
+            cwd=project_path,  # Must run inside valid project
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+            text=True,
+            start_new_session=True,  # Avoid PermissionError on some OS
+        )
+
+        time.sleep(15)  # Give the server time to start
+
+        print("\n🧪 Verifying if Kedro Viz is running...")
+
+        if not is_port_open("127.0.0.1", viz_port):
+            stdout, stderr = proc.communicate(timeout=10)
+            print("\n[STDOUT] Kedro Viz:\n", stdout.strip())
+            print("\n[STDERR] Kedro Viz:\n", stderr.strip())
+            proc.terminate()
+            assert False, f"Kedro Viz did not start on port {viz_port}"
+
+        print(f"\n✅ Kedro Viz successfully started on port {viz_port}")
+
+        proc.terminate()
+        proc.wait(timeout=10)

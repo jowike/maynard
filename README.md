@@ -15,12 +15,14 @@ Based on years of experience in machine learning and econometrics, we’ve build
 
 * **Real-time Insights** – Instant prediction updates driven by economic news, based on machine learning + econometrics. 
 * **Explainable AI along the way (global and local)** – Aligned with responsible AI principles, the tool eliminates the ‘black box’ effect — not only tells you what’s gonna happen, but also provides insights into the why behind the predictions. 
-* **Battle-tested during COVID-19 pandemic** – By using machine learning algorithms and real-time data, `maynard` reacts fast to economic shocks. Our models started showing signs of weakening US growth in mid-March 2020.
-* **Proven in production** – it's the monthly model factory behind [InsightsNow.app](https://github.com/jowike/InsightsNow)
+* **Battle-tested during COVID-19 pandemic** – By using machine learning algorithms and real-time data, `maynard` reacts fast to economic shocks. Our models started showing signs of weakening US growth in April 2020.
+* **Proven in production** – `maynard` is already being used in practice. It's pipeline is the forecasting core behind [InsightsNow.app](https://github.com/jowike/InsightsNow) – a live dashboard that shows up-to-date predictions for key macroeconomic indicators. Essentially, it runs in the background as a monthly model factory.
 
-  Ready to see it in action?
-    - 🎞️ [Jump to the demo →](https://www.youtube.com/watch?v=RfoxH-lfU7k) for tour of the tool
-    - 💻  Try the live instance → [https://insightsnow.mini.pw.edu.pl](https://insightsnow.mini.pw.edu.pl/pages/dashboard) and explore the dashboard yourself
+  To get a better feel for how it works:
+    - 🎞️ [jump to the demo →](https://www.youtube.com/watch?v=RfoxH-lfU7k) for a guided tour of the tool. It walks through the dashboard and reveals what kinds of questions it can help answer. 
+    - 💻  try the live instance → [https://insightsnow.mini.pw.edu.pl](https://insightsnow.mini.pw.edu.pl/pages/dashboard) and explore the dashboard yourself
+
+Together, they show how our package  moves from concept to something that is ready to use — explainable, proven, and grounded in real-world needs.
 
 ## 🤓 Some technical details for the geek in you
 
@@ -63,8 +65,6 @@ It handles everything — from raw data to cleaned inputs, model training, and f
     Every forecast comes with accuracy metrics like R², RMSE, and MAPE — so you can judge how the model performs over time. It also provides confidence bands based on backtesting errors, showing the likely range of outcomes and benchmark predictions of baseline models (ARIMA and VAR).
 * **🧮 Tells you what’s driving the forecast**  
     You don’t just get a number — you get context. Local explanations (for each forecast) and global ones (across time) tell you which features are important and what are the underlying reasons for each forecast. No more black boxes — people want to know why
----
-Here's a revised version of your **"Getting Started"** section — keeping it simple, friendly, and logically flowing from install → setup → run → explore:
 
 ---
 
@@ -92,43 +92,70 @@ Sample input data is available in `/data/0_source/`
 
 ---
 
-### 🧙🏻‍♂️ 3. Make your first forecast 
+### 🧙🏻‍♂️ 3. Make your first forecast
 
-Run the full workflow from raw data to final forecast:
+First, set things up by creating a new project:
+
+```bash
+maynard init my-project
+cd my-project
+```
+
+Then you're ready to go. To run the full pipeline end-to-end — from raw data all the way to the final forecast — just type:
 
 ```bash
 maynard run
 ```
 
-Want to test just a piece of it? No problem:
+Just want to run part of the workflow? You can do it — here are a few common use cases:
 
-* **Run a single step** (e.g. just transform time series):
+* **Run specific steps only**
 
-  ```bash
-  maynard run --from-nodes transform_time_series_node
-  ```
-
-* **Run a chunk of the pipeline** (e.g. from transformation to model estimation):
-
-  ```bash
-  maynard run --from-nodes transform_time_series_node --to-nodes estimate_ml_models_node,estimate_arima_node,estimate_var_node
-  ```
-
-* **Run selected model nodes only:**
+  Want to skip the prep and jump straight to model estimation? Here you go:
 
   ```bash
   maynard run --nodes estimate_ml_models_node,estimate_arima_node,estimate_var_node
   ```
 
+* **Start partway through and let `maynard` take it from there**
+
+  Want to jump in halfway? Start from any node — let it be data transformation — and run the rest:
+
+  ```bash
+  maynard run --from-nodes transform_time_series_node
+  ```
+
+> ⚠️ Heads up: you can only use one of `--nodes`, `--from-nodes`, or `--to-nodes` at a time — they don’t work together.
+
 ---
 
 ### 🎨 4. Explore the pipeline visually
 
-Want to see how it all fits together? Launch the interactive blueprint of your data and ML workflows:
+To visualize the pipeline, just make sure you’ve set up your project first — then launch the interactive blueprint of your data and ML workflows:
 
 ```bash
 maynard viz
 ```
+
+---
+
+### 💡 **Quick tip: dry run**
+
+Want to check what’s going to happen before running the full pipeline?
+
+Run tests on any part of the project using:
+
+```bash
+pytest -s tests/  # or run a specific file, e.g.
+pytest -s tests/test_run_command_with_nodes.py
+```
+
+This will print out detailed logs — super handy for making sure everything’s set up correctly before a full run.
+
+
+🙈 If anything goes wrong, no worries — we’ve got you . Just let us know – we’re here to help. 
+
+Otherwise: hats off 🎩 — you just pulled off what most real-world forecasters only *aspire* to! 🎉🎊
 
 ---
 

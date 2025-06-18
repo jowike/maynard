@@ -15,6 +15,10 @@ import socket
 from pathlib import Path
 import typer
 
+import tempfile
+import shutil
+import maynard
+
 import typer
 import importlib.resources as pkg_resources
 
@@ -27,6 +31,47 @@ def _find_project_root(start_path: Path) -> Path:
         if (parent / "pyproject.toml").exists():
             return parent
     raise FileNotFoundError("❌ Could not find pyproject.toml")
+
+
+def ignore_cache_and_meta(dir, files):
+    return [f for f in files if f == "__pycache__" or f.endswith(".pyc") or f == ".DS_Store"]
+
+
+@app.command()
+def init(path: Path = typer.Argument(..., help="Destination folder for the new project")):
+    """Initialize project with src/maynard/, and move conf/, data/, pyproject.toml."""
+
+    if path.exists():
+        raise typer.BadParameter(f"❌ Target path '{path}' already exists.")
+    path.mkdir(parents=True)
+
+    # Source root inside the wheel
+    src_root = pkg_resources.files(maynard)
+
+    TEMPLATE_PATHS = [
+        "dependencies",
+        "pipelines",
+        "pipeline_registry.py",
+        "settings.py",
+    ]
+
+    for rel_path in TEMPLATE_PATHS:
+        src_item = src_root / rel_path
+        target_item = path / "src" / "maynard" / rel_path
+        target_item.parent.mkdir(parents=True, exist_ok=True)
+
+        if src_item.is_dir():
+            shutil.copytree(src_item, target_item, ignore=ignore_cache_and_meta)
+        elif src_item.is_file():
+            shutil.copy2(src_item, target_item)
+        else:
+            raise FileNotFoundError(f"❌ Template path not found in package: {rel_path}")
+
+    # Copy conf/, data/, pyproject.toml → top-level
+    for name in ["conf", "data"]:
+        shutil.copytree(str(src_root / name), str(path / name))
+
+    shutil.copy2(str(src_root / "pyproject.toml"), str(path / "pyproject.toml"))
 
 
 @app.command()
@@ -116,6 +161,7 @@ def viz(
         raise IOError("No free ports")
 
     port = port or _free_port()
+    print(os.listdir(Path.cwd()))
     root = project_path or _find_project_root(Path.cwd())
 
     os.chdir(root)
