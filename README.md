@@ -94,27 +94,45 @@ Sample input data is available in `/data/0_source/`
 
 ### 🧙🏻‍♂️ 3. Make your first forecast
 
-First, set things up by creating a new project:
+First, set things up by creating a new project (in this example, we’ll call it MaynardAI — but feel free to use any name you like):
 
 ```bash
-maynard init my-project
-cd my-project
+maynard init MaynardAI
+cd MaynardAI
 ```
 
-Then you're ready to go. To run the full pipeline end-to-end — from raw data all the way to the final forecast — just type:
+Then you're ready to go. 
+
+#### 🧭 Visualize the pipeline
+
+To see how everything connects, launch the interactive blueprint of your data and ML workflows:
+
+```bash
+maynard viz
+```
+
+---
+
+#### 🚀 Run the full pipeline
+
+To run everything end-to-end — from raw data all the way to the final forecast — just type:
 
 ```bash
 maynard run
 ```
 
-Just want to run part of the workflow? You can do it — here are a few common use cases:
+---
+
+#### 🎯 Want to run only part of the workflow?
+
+You can totally run just a piece of it — here’s how:
 
 * **Run specific steps only**
 
   Want to skip the prep and jump straight to model estimation? Here you go:
 
   ```bash
-  maynard run --nodes estimate_ml_models_node,estimate_arima_node,estimate_var_node
+  maynard run --nodes estimate_ml_models,estimate_arima,estimate_var
   ```
 
 * **Start partway through and let `maynard` take it from there**
@@ -122,20 +140,10 @@ Just want to run part of the workflow? You can do it — here are a few common u
   Want to jump in halfway? Start from any node — let it be data transformation — and run the rest:
 
   ```bash
-  maynard run --from-nodes transform_time_series_node
+  maynard run --from-nodes transform_time_series
   ```
 
 > ⚠️ Heads up: you can only use one of `--nodes`, `--from-nodes`, or `--to-nodes` at a time — they don’t work together.
-
----
-
-### 🎨 4. Explore the pipeline visually
-
-To visualize the pipeline, just make sure you’ve set up your project first — then launch the interactive blueprint of your data and ML workflows:
-
-```bash
-maynard viz
-```
 
 ---
 

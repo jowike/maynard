@@ -3,7 +3,7 @@ import pandas as pd
 import numpy as np
 from typing import List, Tuple
 
-from maynard.dependencies.tools import _align_dates, _convert_to_datetime
+from maynard.dependencies.tools import align_dates, convert_to_datetime
 
 import warnings
 
@@ -157,7 +157,7 @@ def prepare_real_time_vintage_data(
 
     # Start of the main function
     ref_date = pd.to_datetime(ref_date)
-    ds = _align_dates(dataframe=ds, date_colname=ref_date_col)
+    ds = align_dates(dataframe=ds, date_colname=ref_date_col)
 
     y_long = ds[ds[series_code_col] == y_code]
     y_pivot = y_long.pivot(
@@ -202,8 +202,8 @@ def prepare_real_time_vintage_data(
 
     df_long = pd.concat(
         [
-            _convert_to_datetime(y_long, [ref_date_col, pub_date_col]),
-            _convert_to_datetime(X_df_long, [ref_date_col, pub_date_col]),
+            convert_to_datetime(y_long, [ref_date_col, pub_date_col]),
+            convert_to_datetime(X_df_long, [ref_date_col, pub_date_col]),
         ]
     )
 

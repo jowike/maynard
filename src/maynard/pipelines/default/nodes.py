@@ -16,7 +16,7 @@ from rpy2.robjects import default_converter
 from rpy2.robjects import pandas2ri
 
 from maynard.dependencies.tools import (
-    _convert_to_datetime,
+    convert_to_datetime,
     cast_spec_to_dict,
     suggest_transformation,
     mape,
@@ -81,7 +81,7 @@ def prepare_vintage_data(
             - Dictionary-style variable specification
     """
     # Convert ref/pub date columns to datetime
-    ds = _convert_to_datetime(
+    ds = convert_to_datetime(
         ds, [parameters["ref_date_col"], parameters["pub_date_col"]]
     )
 
@@ -456,7 +456,7 @@ def test_variance(
         # if spec_options:
         to_write = ds.copy()
     else:
-        ds = _convert_to_datetime(ds, [parameters["ref_date_col"]])
+        ds = convert_to_datetime(ds, [parameters["ref_date_col"]])
 
         ds = ds.set_index(parameters["ref_date_col"]).sort_index()
         X, y = ds.drop(columns=[parameters["y_code"]]), ds[[parameters["y_code"]]]
@@ -508,7 +508,7 @@ def test_stationarity(
         # if spec_options:
         to_write = ds.copy()
     else:
-        ds = _convert_to_datetime(ds, [parameters["ref_date_col"]])
+        ds = convert_to_datetime(ds, [parameters["ref_date_col"]])
 
         ds = ds.set_index(parameters["ref_date_col"]).sort_index()
         X, y = ds.drop(columns=[parameters["y_code"]]), ds[[parameters["y_code"]]]
@@ -551,7 +551,7 @@ def apply_series_selection(
         Filtered dataset containing only selected series and the datetime column.
     """
 
-    ds = _convert_to_datetime(ds, [parameters["ref_date_col"]])
+    ds = convert_to_datetime(ds, [parameters["ref_date_col"]])
     ds = ds.set_index(parameters["ref_date_col"]).sort_index()
 
     Spec = cast_spec_to_dict(spec)

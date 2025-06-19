@@ -112,7 +112,7 @@ def suggest_transformation(unit: str) -> str:
     return "ch1"
 
 
-def _convert_to_datetime(df: pd.DataFrame, colnames: List[str]) -> pd.DataFrame:
+def convert_to_datetime(df: pd.DataFrame, colnames: List[str]) -> pd.DataFrame:
     """
     Converts selected columns in a DataFrame to datetime format.
 
@@ -133,7 +133,7 @@ def _convert_to_datetime(df: pd.DataFrame, colnames: List[str]) -> pd.DataFrame:
     return df
 
 
-def _align_dates(dataframe: pd.DataFrame, date_colname: str) -> pd.DataFrame:
+def align_dates(dataframe: pd.DataFrame, date_colname: str) -> pd.DataFrame:
     """
     Shifts all dates in a column to the first day of their month.
 

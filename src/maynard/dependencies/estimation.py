@@ -14,7 +14,7 @@ from statsmodels.tsa.api import VAR
 import shap
 
 from maynard.dependencies.tools import (
-    _convert_to_datetime,
+    convert_to_datetime,
     rmse,
     mape,
     cast_spec_to_dict,
@@ -87,7 +87,7 @@ def ml_fit_predict(
 
     reference_date = pd.to_datetime(reference_date, format="%Y-%m-%d")
 
-    df = _convert_to_datetime(df=ds, colnames=[ref_date_col])
+    df = convert_to_datetime(df=ds, colnames=[ref_date_col])
     df = df.set_index(ref_date_col)
 
     # Create a list of test dates in reverse chronological order
@@ -214,7 +214,7 @@ def arima_fit_predict(
 
     reference_date = pd.to_datetime(reference_date, format="%Y-%m-%d")
 
-    df = _convert_to_datetime(df=ds, colnames=[ref_date_col])
+    df = convert_to_datetime(df=ds, colnames=[ref_date_col])
     df = df.set_index(ref_date_col)
 
     test_dates = pd.to_datetime(
@@ -287,7 +287,7 @@ def var_fit_predict(
 
     reference_date = pd.to_datetime(reference_date, format="%Y-%m-%d")
 
-    df = _convert_to_datetime(df=ds, colnames=[ref_date_col])
+    df = convert_to_datetime(df=ds, colnames=[ref_date_col])
     df = df.set_index(ref_date_col)
 
     test_dates = pd.to_datetime(
@@ -668,7 +668,7 @@ def cast_to_base_unit(
     """
 
     Spec = cast_spec_to_dict(spec.loc[spec["seriesid"] == series_name])
-    ds = _convert_to_datetime(ds, ["ReferenceDate"])
+    ds = convert_to_datetime(ds, ["ReferenceDate"])
     dsrc = ds.set_index("ReferenceDate")
 
     base_series = dsrc[series_name]

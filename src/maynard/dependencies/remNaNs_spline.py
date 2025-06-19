@@ -2,7 +2,6 @@ from scipy.signal import lfilter
 from scipy.interpolate import splrep, splev
 import numpy as np
 import pandas as pd
-from maynard.dependencies.ragged_edges import shift_to_fill_trailing_nans
 
 from scipy.signal import lfilter
 from scipy.interpolate import splrep, splev
