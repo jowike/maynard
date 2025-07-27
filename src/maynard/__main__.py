@@ -70,7 +70,6 @@ def init(path: Path = typer.Argument(..., help="Destination folder for the new p
     # Copy conf/, data/, pyproject.toml → top-level
     for name in ["conf", "data"]:
         shutil.copytree(str(src_root / name), str(path / name))
-
     shutil.copy2(str(src_root / "pyproject.toml"), str(path / "pyproject.toml"))
 
 

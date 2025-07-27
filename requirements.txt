@@ -1,25 +1,19 @@
-ipython>=8.10
-jupyterlab>=3.0
-notebook
-kedro~=0.19.9
-kedro[jupyter]
-kedro-datasets[pandas-csvdataset, pandas-exceldataset, pandas-parquetdataset, plotly-plotlydataset, plotly-jsondataset, matplotlib-matplotlibwriter]>=3.0
-kedro-viz>=6.7.0
-scikit-learn~=1.5.1
-seaborn~=0.12.1
-bottleneck
+kedro==0.19.9
+kedro-viz==10.1.0
+kedro-datasets==6.0.0
+bottleneck==1.4.0
 numpy==1.26.4
-xlsxwriter
-openpyxl
-pyarrow
-fastparquet
-mifs @ git+https://github.com/jowike/mifs.git@maynard
-pmdarima
-linear-tree
-shap
-python_dateutil
-pandas
-rpy2
-scipy
-statsmodels
-typer
+pmdarima==2.0.4
+linear-tree==0.3.5
+mifs==0.0.1.dev0  # git+https://github.com/jowike/mifs.git@maynard
+numpy==1.26.4
+seaborn==0.12.2
+xlsxwriter==3.2.2
+openpyxl==3.1.5
+pyarrow==18.0.0
+fastparquet==2024.5.0
+kaleido==0.2.1
+diskcache==5.6.3
+shap==0.47.0
+rpy2==3.5.11
+scipy==1.11.4

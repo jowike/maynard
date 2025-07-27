@@ -11,7 +11,7 @@ Based on years of experience in machine learning and econometrics, we’ve build
 
 ---
 
-## 🚀 Why use maynard?
+## 🔥 Why use maynard?
 
 * **Real-time Insights** – Instant prediction updates driven by economic news, based on machine learning + econometrics. 
 * **Explainable AI along the way (global and local)** – Aligned with responsible AI principles, the tool eliminates the ‘black box’ effect — not only tells you what’s gonna happen, but also provides insights into the why behind the predictions. 
@@ -47,7 +47,7 @@ It handles everything — from raw data to cleaned inputs, model training, and f
 +---------------------+
 ```
 
-### 🔮 What’s under the hood?
+### 🌕 What’s under the hood?
 
 `maynard` is designed for impact. This nowcasting tool is about information efficiency — using just the right amount of data to deliver fast, reliable, and explainable forecasts. Here’s what it actually does:
 * **📅 Uses real-time-like data**  
@@ -69,8 +69,19 @@ It handles everything — from raw data to cleaned inputs, model training, and f
 ---
 
 ## 🏁 Getting Started
+### 🪨 1. Make sure R (and strucchange) are ready to go
 
-### 📦 1. Install the package
+> Maynard uses the `strucchange` R package (through the `rpy2` Python bridge) to spot structural breaks in time series data.
+
+If you don’t have R installed, you can download it from [cran.r-project.org](https://cran.r-project.org/).
+
+Then, open an R console and run:
+
+```r
+install.packages("strucchange")
+```
+
+### 📦 2. Install the package
 
 First, install `maynard` in editable mode:
 
@@ -80,7 +91,7 @@ pip install -e .
 
 ---
 
-### ⚙️ 2. Configure your run
+### 🪛 3. Configure your run
 
 Control how the pipeline behaves by editing:
 
@@ -92,7 +103,7 @@ Sample input data is available in `/data/0_source/`
 
 ---
 
-### 🧙🏻‍♂️ 3. Make your first forecast
+### 🧙🏻‍♂️ 4. Make your first forecast
 
 First, set things up by creating a new project (in this example, we’ll call it MaynardAI — but feel free to use any name you like):
 
@@ -101,9 +112,9 @@ maynard init MaynardAI
 cd MaynardAI
 ```
 
-Then you're ready to go. 
+Then you're ready to go! 🔮
 
-#### 🧭 Visualize the pipeline
+#### 🎨 Visualize the pipeline
 
 To see how everything connects, launch the interactive blueprint of your data and ML workflows:
 
@@ -123,7 +134,7 @@ maynard run
 
 ---
 
-#### 🎯 Want to run only part of the workflow?
+#### 🌔 Want to run only part of the workflow?
 
 You can totally run just a piece of it — here’s how:
 

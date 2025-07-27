@@ -729,9 +729,9 @@ def estimate_ml_node(
     print("\n======== Retransformed Nowcast ========")
     print(f"Reference Date            : {reference_date}")
     print(f"Retransformed Forecast    : {retr_forecast:,.2f}")
-    print(f"R-Squared (R²)            : {r2_score(y_true=eval_df1["VariableValue"], y_pred=eval_df1["Predicted"]):.4f}")
-    print(f"Mean Absolute Percentage Error (MAPE): {mape(actual=eval_df1["VariableValue"], predicted=eval_df1["Predicted"]):.2f}%")
-    print(f"Root Mean Square Error (RMSE) : {mse(actual=eval_df1["VariableValue"], predicted=eval_df1["Predicted"]):.4f}")
+    print(f"R-Squared (R²)            : {r2_score(y_true=eval_df1['VariableValue'], y_pred=eval_df1['Predicted']):.4f}")
+    print(f"Mean Absolute Percentage Error (MAPE): {mape(actual=eval_df1['VariableValue'], predicted=eval_df1['Predicted']):.2f}%")
+    print(f"Root Mean Square Error (RMSE) : {mse(actual=eval_df1['VariableValue'], predicted=eval_df1['Predicted']):.4f}")
 
     pred_act["Lag(Actual Change (MoM))"] = (
         pred_act["VariableValue"] - pred_act["Lag"]
@@ -831,9 +831,9 @@ def estimate_ml_node(
 
     print("=============== Summary ===============")
     print(f"Adjusted Forecast    : {adjusted_forecast:,.2f}")
-    print(f"R-Squared (R²)            : {r2_score(y_true=eval_df2["VariableValue"], y_pred=eval_df2["Nowcast"]):.4f}")
-    print(f"Mean Absolute Percentage Error (MAPE): {mape(actual=eval_df2["VariableValue"], predicted=eval_df2["Nowcast"]):.2f}%")
-    print(f"Root Mean Square Error (RMSE) : {mse(actual=eval_df2["VariableValue"], predicted=eval_df2["Nowcast"]):.4f}")
+    print(f"R-Squared (R²)            : {r2_score(y_true=eval_df2['VariableValue'], y_pred=eval_df2['Nowcast']):.4f}")
+    print(f"Mean Absolute Percentage Error (MAPE): {mape(actual=eval_df2['VariableValue'], predicted=eval_df2['Nowcast']):.2f}%")
+    print(f"Root Mean Square Error (RMSE) : {mse(actual=eval_df2['VariableValue'], predicted=eval_df2['Nowcast']):.4f}")
 
     # Save everything to an Excel file with multiple sheets
     excel_file = os.path.join(

@@ -8,7 +8,7 @@ from sklearn.linear_model import LinearRegression, Ridge
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.base import BaseEstimator
 
-from lineartree import LinearForestRegressor
+# from lineartree import LinearForestRegressor
 import pmdarima as pm
 from statsmodels.tsa.api import VAR
 import shap
@@ -390,9 +390,9 @@ def estimate_automl(
     models = {
         "LinearRegression": LinearRegression(),
         "Ridge": Ridge(),
-        "LinearForest": LinearForestRegressor(
-            base_estimator=Ridge(), random_state=42, max_features="log2"
-        ),
+        # "LinearForest": LinearForestRegressor(
+        #     base_estimator=Ridge(), random_state=42, max_features="log2"
+        # ),
         "RandomForestRegressor": RandomForestRegressor(),
     }
 

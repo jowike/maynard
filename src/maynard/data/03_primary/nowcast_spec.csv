@@ -1,0 +1,27 @@
+seriesid,seriesname,frequency,transformation,units,category,region,model
+PAYEMS,Payroll Employment,m,chg,Thousands of Persons,Labor,United States,1
+JTSJOL,Job Openings,m,chg,Thousands,Labor,United States,1
+CPIAUCSL,Consumer Price Index,m,pch,Index,Prices,United States,1
+DGORDER,Durable Goods Orders,m,pch,"$, Millions",Manufacturing,United States,1
+HSN1F,New Home Sales,m,pch,Thousands,Housing and Construction,United States,1
+RSAFS,Retail Sales,m,pch,"$, Millions",Retail and Consumption,United States,1
+UNRATE,Unemployment Rate,m,chg,%,Labor,United States,1
+HOUST,Housing Starts,m,pch,Thousands of Units,Housing and Construction,United States,1
+INDPRO,Industrial Production,m,pch,Index,Manufacturing,United States,1
+PPIFIS,Producer Price Index,m,pch,Index,Prices,United States,1
+DSPIC96,Personal Income,m,pch,"Chained $, Billions",National Accounts,United States,1
+BOPTEXP,Exports,m,pch,"$, Millions",International Trade,United States,1
+BOPTIMP,Imports,m,pch,"$, Millions",International Trade,United States,1
+WHLSLRIMSA,Wholesale Inventories,m,pch,"$, Millions",Manufacturing,United States,1
+TTLCONS,Construction Spending,m,pch,"$, Millions",Housing and Construction,United States,1
+IR,Import Price Index,m,pch,Index,International Trade,United States,1
+CPILFESL,Core Consumer Price Index,m,pch,Index,Prices,United States,1
+PCEPILFE,Core PCE Price Index,m,pch,Index,Prices,United States,1
+PCEPI,PCE Price Index,m,pch,Index,Prices,United States,1
+PERMIT,Building Permits,m,chg,Thousands of Units,Housing and Construction,United States,1
+TCU,Capacity Utilization Rate,m,chg,%,Manufacturing,United States,1
+BUSINV,Business Inventories,m,pch,"$, Millions",International Trade,United States,1
+IQ,Export Price Index,m,pch,Index,International trade,United States,1
+GACDISA066MSFRBNY,Empire State Mfg Index,m,lin,Index,Surveys,United States,1
+PCEC96,Real Consumption Spending,m,pch,"Chained $, Billions",Retail and Consumption,United States,1
+GACDFSA066MSFRBPHI,Philadelphia Fed Mfg Index,m,lin,Index,Surveys,United States,1
